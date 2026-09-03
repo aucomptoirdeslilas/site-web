@@ -461,6 +461,21 @@ html[data-dir="b"] .metier .t { font-weight: 500; }
 .sel-tab.active .ct { color: var(--accent-2); }
 html[data-dir="b"] .sel-tab.active .ct { color: #cda14d; }
 
+/* filières mises en avant (races / labels) */
+.filieres { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2vw, 28px); margin-bottom: clamp(40px, 5.5vw, 64px); }
+.filiere { position: relative; display: flex; flex-direction: column; gap: 18px; border-radius: var(--r); overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+.filiere-media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+.filiere-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+.filiere:hover .filiere-media img { transform: scale(1.05); }
+.filiere-media .pill { position: absolute; top: 14px; left: 14px; z-index: 2; }
+.filiere-body { padding: 4px clamp(20px, 2.4vw, 30px) clamp(24px, 2.6vw, 32px); display: flex; flex-direction: column; gap: 10px; }
+.filiere-body h4 { font-family: var(--display); font-weight: 800; font-size: clamp(20px, 1.8vw, 25px); margin: 0; letter-spacing: -.01em; color: var(--ink); }
+html[data-dir="a"] .filiere-body h4 { text-transform: uppercase; }
+html[data-dir="b"] .filiere-body h4 { font-weight: 500; }
+.filiere-body .meta { font-family: var(--ui); font-weight: 600; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
+.filiere-body p { font-family: var(--ui); font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+@media (max-width: 820px) { .filieres { grid-template-columns: 1fr; } }
+
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 24px); }
 .product { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 14px; }
 .product .ph { position: relative; aspect-ratio: 4/5; border-radius: var(--r); overflow: hidden; }
@@ -876,6 +891,23 @@ const PRODUCTS = [
   { name: 'Plat du jour', meta: 'Traiteur', cat: 'traiteur', tag: 'Traiteur', ph: 'plat\ndu jour' },
 ];
 
+const FILIERES = [
+  {
+    name: 'Le Porc Noir de Bigorre',
+    meta: 'Race ancestrale · Pyrénées',
+    tag: 'Rareté',
+    img: 'assets/porc-noir-de-bigorre.png',
+    text: "Une race ancestrale, sauvée de l'oubli, élevée en plein air au pied des Pyrénées. Le Porc Noir de Bigorre grandit lentement, se nourrit de glands et de châtaignes, et nous offre une viande persillée, dense, au goût affirmé qu'aucun élevage industriel ne sait reproduire. Une pièce rare, pour ceux qui cherchent le vrai goût du terroir.",
+  },
+  {
+    name: 'Le Porc Francilin',
+    meta: 'Paris Terroirs · Île-de-France',
+    tag: '100% local',
+    img: 'assets/porc-francilin.png',
+    text: "Le goût de notre terroir, la santé en plus. Découvrez le Porc Francilin par Paris Terroirs : une filière 100% locale, née et élevée au cœur du Bassin Parisien. Nourri aux graines de lin pour une viande tendre et naturellement riche en Oméga-3, c'est le choix d'une charcuterie d'excellence, sans OGM, qui soutient directement nos éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
+  },
+];
+
 const GALERIE = [
   { c: 'g1', label: 'vitrine\nle matin' },
   { c: 'g2', label: 'atelier\ndécoupe', dark: true },
@@ -1228,6 +1260,22 @@ function Selection() {
             <button key={c.id} className={`sel-tab ${cat === c.id ? 'active' : ''}`} onClick={() => setCat(c.id)}>
               {c.label}<span className="ct">{counts[c.id] || 0}</span>
             </button>
+          ))}
+        </div>
+
+        <div className="filieres reveal">
+          {FILIERES.map((f) => (
+            <article key={f.name} className="filiere" data-cursor="En boutique">
+              <div className="filiere-media">
+                <span className="pill">{f.tag}</span>
+                <img src={f.img} alt={f.name} loading="lazy" />
+              </div>
+              <div className="filiere-body">
+                <span className="meta">{f.meta}</span>
+                <h4>{f.name}</h4>
+                <p>{f.text}</p>
+              </div>
+            </article>
           ))}
         </div>
 

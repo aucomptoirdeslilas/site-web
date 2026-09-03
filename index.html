@@ -449,18 +449,6 @@ html[data-dir="b"] .metier .t { font-weight: 500; }
 /* =================================================================
    SELECTION
    ================================================================= */
-.sel-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: clamp(36px,5vw,56px) 0 clamp(28px,4vw,44px); }
-.sel-tab {
-  font-family: var(--ui); font-weight: 600; font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
-  padding: 11px 18px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink-soft);
-  cursor: pointer; transition: all .22s ease; display: inline-flex; align-items: center; gap: 9px;
-}
-.sel-tab:hover { color: var(--ink); border-color: var(--ink); }
-.sel-tab.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.sel-tab .ct { font-size: 10px; color: var(--accent); }
-.sel-tab.active .ct { color: var(--accent-2); }
-html[data-dir="b"] .sel-tab.active .ct { color: #cda14d; }
-
 /* filières mises en avant (races / labels) */
 .filieres { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2vw, 28px); margin-bottom: clamp(40px, 5.5vw, 64px); }
 .filiere { position: relative; display: flex; flex-direction: column; gap: 18px; border-radius: var(--r); overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
@@ -512,20 +500,6 @@ html[data-dir="b"] .product-foot h4 { font-weight: 500; }
     repeating-linear-gradient(135deg, transparent 0 14px, rgba(244,238,226,.05) 14px 15px),
     linear-gradient(160deg, #2a2018, #15110d); }
 .imgbox.dark::after { color: rgba(244,238,226,.5); }
-
-/* =================================================================
-   GALERIE
-   ================================================================= */
-.gal-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: clamp(90px, 11vw, 150px); gap: 12px; margin-top: clamp(36px,5vw,56px); }
-.gal-item { overflow: hidden; border-radius: var(--r); }
-.gal-item .imgbox { width: 100%; height: 100%; transition: transform 1s ease; }
-.gal-item:hover .imgbox { transform: scale(1.05); }
-.g1 { grid-column: span 5; grid-row: span 3; }
-.g2 { grid-column: span 4; grid-row: span 2; }
-.g3 { grid-column: span 3; grid-row: span 2; }
-.g4 { grid-column: span 4; grid-row: span 3; }
-.g5 { grid-column: span 3; grid-row: span 3; }
-.g6 { grid-column: span 5; grid-row: span 2; }
 
 /* =================================================================
    VIDEO band (rotisserie)
@@ -706,8 +680,6 @@ html[data-dir="b"] .footer-col h5 { color: #cda14d; }
   .hero-top .r { text-align: left; }
   .field-row { grid-template-columns: 1fr; }
   .products { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .gal-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 88px; }
-  .g1,.g2,.g3,.g4,.g5,.g6 { grid-column: span 6; grid-row: span 2; }
   .footer-grid { grid-template-columns: 1fr; }
 }
 @media (max-height: 800px) and (min-width: 601px) {
@@ -822,9 +794,6 @@ html { cursor: none; }
 }
 .product:hover .ph::after { opacity: 1; }
 
-/* gallery items: subtle individual reveal scale */
-.gal-item { transition: transform .6s cubic-bezier(.2,.8,.2,1); }
-
 /* scroll-velocity marquee skew handled via inline transform from JS */
 .marquee-track { will-change: transform; }
 
@@ -858,7 +827,6 @@ const NAV = [
   { id: 'maison', label: 'La Maison' },
   { id: 'metiers', label: 'Nos Métiers' },
   { id: 'selection', label: 'Sélection' },
-  { id: 'galerie', label: 'Galerie' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -869,15 +837,6 @@ const METIERS = [
     d: "Charcuterie et traiteur de maisons reconnues ou faite maison. Traiteur : plats cuisinés, sandwichs chauds, cassoulet, bowls du jour." },
   { n: '03', t: 'Rôtisserie', sub: '', subAfter: 'à la broche', v: 'assets/rotisserie.mp4',
     d: "Poulets fermiers Label Rouge, élevés en plein air, rôtis devant vous. Cuisson lente à la broche, épices et marinades maison." },
-];
-
-const CATEGORIES = [
-  { id: 'tout', label: 'Tout' },
-  { id: 'boeuf', label: 'Bœuf' },
-  { id: 'veau', label: 'Veau & Agneau' },
-  { id: 'volaille', label: 'Volaille' },
-  { id: 'charcuterie', label: 'Charcuterie' },
-  { id: 'traiteur', label: 'Traiteur' },
 ];
 
 const PRODUCTS = [
@@ -906,15 +865,6 @@ const FILIERES = [
     img: 'assets/porc-francilin.png',
     text: "Le goût de notre terroir, la santé en plus. Découvrez le Porc Francilin par Paris Terroirs : une filière 100% locale, née et élevée au cœur du Bassin Parisien. Nourri aux graines de lin pour une viande tendre et naturellement riche en Oméga-3, c'est le choix d'une charcuterie d'excellence, sans OGM, qui soutient directement nos éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
   },
-];
-
-const GALERIE = [
-  { c: 'g1', label: 'vitrine\nle matin' },
-  { c: 'g2', label: 'atelier\ndécoupe', dark: true },
-  { c: 'g3', label: 'détail\népices' },
-  { c: 'g4', label: "cave\nd'affinage", dark: true },
-  { c: 'g5', label: 'plateau\ntraiteur' },
-  { c: 'g6', label: "l'équipe" },
 ];
 
 /* ----------------------------- hooks ----------------------------- */
@@ -978,7 +928,7 @@ function useCursor() {
       }
     };
     const over = (e) => {
-      const hot = e.target.closest('a, button, .product, .gal-item, input, textarea, select, [data-cursor]');
+      const hot = e.target.closest('a, button, .product, .filiere, input, textarea, select, [data-cursor]');
       dot.classList.toggle('is-hot', !!hot);
       ring.classList.toggle('is-hot', !!hot);
       const labelEl = e.target.closest('[data-cursor]');
@@ -1237,13 +1187,6 @@ function Metiers({ onJump }) {
 
 /* ----------------------------- sélection ----------------------------- */
 function Selection() {
-  const [cat, setCat] = useState('tout');
-  const filtered = useMemo(() => cat === 'tout' ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat), [cat]);
-  const counts = useMemo(() => {
-    const m = { tout: PRODUCTS.length };
-    PRODUCTS.forEach(p => { m[p.cat] = (m[p.cat] || 0) + 1; });
-    return m;
-  }, []);
   return (
     <section className="selection section" id="selection">
       <div className="wrap">
@@ -1253,14 +1196,6 @@ function Selection() {
             <h2 className="title h mask m2">Ce qu'on trouve<br /><span className="em">au comptoir</span>.</h2>
           </div>
           <p className="body reveal d2">La vitrine évolue au fil des arrivages. Les prix se découvrent en boutique, passez voir ce que la maison propose aujourd'hui.</p>
-        </div>
-
-        <div className="sel-tabs reveal">
-          {CATEGORIES.map(c => (
-            <button key={c.id} className={`sel-tab ${cat === c.id ? 'active' : ''}`} onClick={() => setCat(c.id)}>
-              {c.label}<span className="ct">{counts[c.id] || 0}</span>
-            </button>
-          ))}
         </div>
 
         <div className="filieres reveal">
@@ -1280,7 +1215,7 @@ function Selection() {
         </div>
 
         <div className="products">
-          {filtered.map((p, i) => (
+          {PRODUCTS.map((p, i) => (
             <article key={p.name} className="product reveal" data-cursor="En boutique" style={{ transitionDelay: `${(i % 4) * .06}s` }}>
               <div className="ph">
                 <span className="pill">{p.tag}</span>
@@ -1317,30 +1252,6 @@ function FilmBand({ y, top, onJump }) {
           <a href="#contact" className="btn btn-on-dark reveal d3" data-magnetic data-cursor="Nous écrire" onClick={(e) => { e.preventDefault(); onJump('contact'); }}>
             Nous rendre visite <span className="arr">→</span>
           </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ----------------------------- galerie ----------------------------- */
-function Galerie() {
-  return (
-    <section className="galerie section" id="galerie">
-      <div className="wrap">
-        <div className="section-head">
-          <div>
-            <Kicker idx="04">Galerie</Kicker>
-            <h2 className="title h mask m2">La boutique,<br /><span className="em">en images</span>.</h2>
-          </div>
-          <p className="body reveal d2">Vitrine, atelier, équipe : les photos de la maison prendront place ici.</p>
-        </div>
-        <div className="gal-grid">
-          {GALERIE.map((g, i) => (
-            <div key={i} className={`gal-item ${g.c} reveal`} data-cursor="Voir" style={{ transitionDelay: `${i * .05}s` }}>
-              <div className={`imgbox ${g.dark ? 'dark' : ''}`} data-label={g.label}></div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -1392,7 +1303,7 @@ function Contact() {
       <div className="wrap">
         <div className="section-head" style={{ marginBottom: 'clamp(28px,4vw,44px)' }}>
           <div>
-            <Kicker idx="05">Contact</Kicker>
+            <Kicker idx="04">Contact</Kicker>
             <h2 className="title h mask m2">Passez<br /><span className="em">au comptoir</span>.</h2>
           </div>
           <p className="lead reveal d2">Un conseil, une commande, un plateau pour vos réceptions ? Le plus simple, c'est de nous appeler ou de venir nous voir.</p>
@@ -1550,7 +1461,7 @@ function App() {
   useEffect(() => {
     const measure = () => {
       const next = {};
-      ['hero', 'maison', 'metiers', 'selection', 'rotisserie', 'galerie', 'contact'].forEach(id => {
+      ['hero', 'maison', 'metiers', 'selection', 'rotisserie', 'contact'].forEach(id => {
         const el = document.getElementById(id);
         if (el) next[id] = el.offsetTop;
       });
@@ -1595,7 +1506,6 @@ function App() {
       <FilmBand y={y} top={tops.rotisserie || 0} onJump={onJump} />
       <Metiers onJump={onJump} />
       <Selection />
-      <Galerie />
       <Contact />
       <MapSection />
     </>

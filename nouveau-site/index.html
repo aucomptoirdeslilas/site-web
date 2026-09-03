@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Au Comptoir Des Lilas</title>
-<meta name="description" content="Boucherie, charcuterie, traiteur, rotisserie - Au Comptoir Des Lilas, votre artisan boucher. Viande 100% francaise, preparee maison." />
+<meta name="description" content="Boucherie, charcuterie, traiteur, rotisserie - Au Comptoir Des Lilas, votre artisan boucher. Viande 100% francaise." />
 <link rel="icon" type="image/png" href="flavicon.png" />
 <meta property="og:title" content="Au Comptoir Des Lilas" />
 <meta property="og:description" content="Boucherie, Charcuterie, Traiteur, Rotisserie - Viande 100% francaise" />
@@ -826,9 +826,9 @@ const METIERS = [
   { n: '01', t: 'Boucherie', sub: '', v: 'assets/boucherie.mp4',
     d: "Bœuf, veau, agneau, porc, cheval, gibier ou viandes exotiques : chaque pièce choisie avec soin et découpée sous vos yeux. Viande 100% française, origine certifiée et traçable." },
   { n: '02', t: 'Charcuterie & traiteur', sub: '', v: 'assets/charcuterie-traiteur.mp4',
-    d: "Charcuterie et traiteur de maisons reconnues ou faite maison. Traiteur : plats cuisinés, sandwichs chauds, cassoulet, bowls du jour." },
+    d: "Charcuterie et traiteur de maisons reconnues. Traiteur : plats cuisinés, sandwichs chauds, cassoulet, bowls du jour." },
   { n: '03', t: 'Rôtisserie', sub: '', subAfter: 'à la broche', v: 'assets/rotisserie.mp4',
-    d: "Poulets fermiers Label Rouge, élevés en plein air, rôtis devant vous. Cuisson lente à la broche, épices et marinades maison." },
+    d: "Poulets fermiers élevés en plein air, rôtis devant vous. Cuisson lente à la broche, épices et marinades." },
 ];
 
 const FILIERES = [
@@ -1079,9 +1079,7 @@ function Hero({ y, onJump }) {
           </a>
           <div className="hero-chips">
             <span className="chip"><span className="dot"></span>Viande 100% française</span>
-            <span className="chip">Volaille en circuit court</span>
             <span className="chip">Porc fermier</span>
-            <span className="chip">Fait maison</span>
           </div>
           <div className="hero-scroll-hint" onClick={() => onJump('maison')}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -1109,7 +1107,7 @@ function Marquee() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); };
   }, []);
-  const items = ['Boucherie', 'Charcuterie', 'Traiteur', 'Rôtisserie', 'Viande 100% française', 'Volaille en circuit court', 'Porc fermier', 'Fait maison'];
+  const items = ['Boucherie', 'Charcuterie', 'Traiteur', 'Rôtisserie', 'Viande 100% française', 'Porc Noir de Bigorre', "Porc fermier d'origine Île-de-France", 'Volaille entière origine Île-de-France'];
   const row = (k) => (
     <span key={k} style={{ display: 'inline-flex', gap: 40 }}>
       {items.map((it, i) => (
@@ -1253,10 +1251,10 @@ function FilmBand({ y, top, onJump }) {
       </video>
       <div className="filmband-veil"></div>
       <div className="filmband-inner">
-        <div className="kicker reveal"><Mark />La rôtisserie, circuit court &amp; local</div>
+        <div className="kicker reveal"><Mark />La rôtisserie, savoir-faire &amp; local</div>
         <h2 className="mask m2">Le goût d'<span className="em">autrefois</span>,<br />retrouvé.</h2>
         <div className="filmband-foot">
-          <p className="reveal d2">Le vrai goût de la volaille en circuit court et local, comme autrefois chez le rôtisseur. Poulets fermiers Label Rouge, travers de porc mariné et bien d'autres, cuisson lente à la broche, pour que chaque bouchée raconte quelque chose.</p>
+          <p className="reveal d2">Le vrai goût de la volaille, comme autrefois chez le rôtisseur. Poulets fermiers, travers de porc mariné et bien d'autres, cuisson lente à la broche, pour que chaque bouchée raconte quelque chose.</p>
           <a href="#contact" className="btn btn-on-dark reveal d3" data-magnetic data-cursor="Nous écrire" onClick={(e) => { e.preventDefault(); onJump('contact'); }}>
             Nous rendre visite <span className="arr">→</span>
           </a>
@@ -1428,7 +1426,7 @@ function Footer({ onJump }) {
               <img src="assets/logo.png" alt="" />
               <div className="t">Au Comptoir<br />des <span>Lilas</span></div>
             </div>
-            <p className="note">Boucherie · charcuterie · traiteur · rôtisserie. Votre artisan boucher, viande 100% française, préparée maison.</p>
+            <p className="note">Boucherie · charcuterie · traiteur · rôtisserie. Votre artisan boucher, viande 100% française.</p>
           </div>
           <div className="footer-col">
             <h5>Le site</h5>

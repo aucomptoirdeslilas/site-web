@@ -450,7 +450,7 @@ html[data-dir="b"] .metier .t { font-weight: 500; }
    SELECTION
    ================================================================= */
 /* filières mises en avant (races / labels) */
-.filieres { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2vw, 28px); margin-bottom: clamp(40px, 5.5vw, 64px); }
+.filieres { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); margin-bottom: clamp(40px, 5.5vw, 64px); }
 .filiere { position: relative; display: flex; flex-direction: column; gap: 18px; border-radius: var(--r); overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
 .filiere-media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
 .filiere-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
@@ -658,6 +658,7 @@ html[data-dir="b"] .footer-col h5 { color: #cda14d; }
   .metier-media { grid-area: media; width: 100%; margin-top: 4px; }
   .metier .go { display: none; }
   .products { grid-template-columns: repeat(2, 1fr); }
+  .filieres { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -854,16 +855,32 @@ const FILIERES = [
   {
     name: 'Le Porc Noir de Bigorre',
     meta: 'Race ancestrale · Pyrénées',
-    tag: 'Rareté',
     img: 'assets/porc-noir-de-bigorre.png',
-    text: "Une race ancestrale, sauvée de l'oubli, élevée en plein air au pied des Pyrénées. Le Porc Noir de Bigorre grandit lentement, se nourrit de glands et de châtaignes, et nous offre une viande persillée, dense, au goût affirmé qu'aucun élevage industriel ne sait reproduire. Une pièce rare, pour ceux qui cherchent le vrai goût du terroir.",
+    text: "Une race ancestrale, sauvée de l'oubli, élevée en plein air au pied des Pyrénées. Le Porc Noir de Bigorre grandit lentement, se nourrit de glands et de châtaignes, et nous offre une viande persillée, dense, au goût affirmé qu'aucun élevage industriel ne sait reproduire. Nous sommes fiers d'être la seule boucherie artisanale de Seine-Saint-Denis (93) à la commercialiser : une pièce rare, pour ceux qui cherchent le vrai goût du terroir.",
   },
   {
     name: 'Le Porc Francilin',
     meta: 'Paris Terroirs · Île-de-France',
-    tag: '100% local',
     img: 'assets/porc-francilin.png',
     text: "Le goût de notre terroir, la santé en plus. Découvrez le Porc Francilin par Paris Terroirs : une filière 100% locale, née et élevée au cœur du Bassin Parisien. Nourri aux graines de lin pour une viande tendre et naturellement riche en Oméga-3, c'est le choix d'une charcuterie d'excellence, sans OGM, qui soutient directement nos éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
+  },
+  {
+    name: "Le Bœuf Blonde d'Aquitaine",
+    meta: 'Race à viande · Sud-Ouest',
+    img: 'assets/blonde-aquitaine.png',
+    text: "Élevée en plein air dans les pâturages du Sud-Ouest, la Blonde d'Aquitaine est réputée pour sa viande tendre, peu grasse et généreusement persillée. Une race rustique, élevée avec patience, qui donne des pièces au goût franc et à la texture fondante. Le choix des connaisseurs pour une côte de bœuf ou un rôti d'exception.",
+  },
+  {
+    name: 'Le Bœuf Charolais',
+    meta: 'Race à viande · Bourgogne',
+    img: 'assets/charolaise.png',
+    text: "Robe blanche, réputation dorée : la Charolaise est l'une des races à viande les plus recherchées de France. Élevée à l'herbe dans les prairies de Bourgogne, elle offre une viande ferme, savoureuse et bien persillée, qui a fait la renommée de la boucherie française bien au-delà de nos frontières.",
+  },
+  {
+    name: 'Le Bœuf Limousin',
+    meta: 'Race à viande · Limousin',
+    img: 'assets/limousine.png',
+    text: "Originaire des pâturages vallonnés du Limousin, cette race rustique élevée en plein air produit une viande tendre, juteuse et fine en bouche. Reconnue Label Rouge pour sa qualité constante, la Limousine est un incontournable de la boucherie traditionnelle, pour les amateurs de viande au goût authentique.",
   },
 ];
 
@@ -1202,7 +1219,7 @@ function Selection() {
           {FILIERES.map((f) => (
             <article key={f.name} className="filiere" data-cursor="En boutique">
               <div className="filiere-media">
-                <span className="pill">{f.tag}</span>
+                {f.tag && <span className="pill">{f.tag}</span>}
                 <img src={f.img} alt={f.name} loading="lazy" />
               </div>
               <div className="filiere-body">

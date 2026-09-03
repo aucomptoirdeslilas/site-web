@@ -339,6 +339,21 @@ html[data-dir="b"] .hero h1 .em { color: #cda14d; }
   50% { transform: translateY(7px); }
 }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.google-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none; color: rgba(244,238,226,.92);
+  padding: 10px 18px; border-radius: 999px;
+  border: 1px solid rgba(244,238,226,.22);
+  background: rgba(244,238,226,.07); backdrop-filter: blur(8px);
+  font-family: var(--ui); transition: border-color .25s, background .25s;
+}
+.google-badge:hover { border-color: rgba(244,238,226,.4); background: rgba(244,238,226,.12); }
+.google-badge .stars { display: inline-flex; gap: 2px; color: #cda14d; }
+.google-badge .stars svg { width: 13px; height: 13px; }
+.google-badge .score { font-weight: 800; font-size: 14px; }
+.google-badge .sep { width: 1px; height: 14px; background: rgba(244,238,226,.22); }
+.google-badge .cnt { font-weight: 600; font-size: 12px; letter-spacing: .04em; color: rgba(244,238,226,.72); white-space: nowrap; }
 .hero-chips { display: inline-flex; align-items: stretch; gap: 0; }
 .hero-chips .chip {
   font-family: var(--ui); font-weight: 600; font-size: clamp(12px, 1.1vw, 15px);
@@ -796,6 +811,9 @@ const TEL_HREF = 'tel:+33688504341';
 const EMAIL = 'bienvenue@aucomptoirdeslilas.fr';
 const ADRESSE = '122 rue de Paris, Les Lilas 93320';
 const MAPS_DIR = 'https://www.google.com/maps/dir/?api=1&destination=122+rue+de+Paris,+Les+Lilas+93320,+France';
+const GOOGLE_AVIS = 'https://www.google.com/maps/search/?api=1&query=Au+Comptoir+Des+Lilas+122+rue+de+Paris+Les+Lilas+93320';
+const GOOGLE_NOTE = 4.2;
+const GOOGLE_AVIS_COUNT = 33;
 
 const NAV = [
   { id: 'maison', label: 'La Maison' },
@@ -1033,6 +1051,32 @@ function Hero({ y, onJump }) {
         </div>
 
         <div className="hero-bot">
+          <a className="google-badge reveal" href={GOOGLE_AVIS} target="_blank" rel="noopener" data-cursor="Voir les avis">
+            <span className="stars">
+              {[0, 1, 2, 3, 4].map(i => (
+                <svg key={i} viewBox="0 0 20 20" fill="currentColor">
+                  {GOOGLE_NOTE >= i + 1 ? (
+                    <path d="M10 1.5l2.6 5.8 6.2.6-4.7 4.2 1.4 6.2L10 15.2l-5.5 3.1 1.4-6.2L1.2 7.9l6.2-.6z" />
+                  ) : GOOGLE_NOTE > i ? (
+                    <>
+                      <defs>
+                        <linearGradient id={`half-${i}`}>
+                          <stop offset="50%" stopColor="currentColor" />
+                          <stop offset="50%" stopColor="transparent" />
+                        </linearGradient>
+                      </defs>
+                      <path fill={`url(#half-${i})`} stroke="currentColor" strokeWidth="0.6" d="M10 1.5l2.6 5.8 6.2.6-4.7 4.2 1.4 6.2L10 15.2l-5.5 3.1 1.4-6.2L1.2 7.9l6.2-.6z" />
+                    </>
+                  ) : (
+                    <path fill="none" stroke="currentColor" strokeWidth="0.8" opacity=".5" d="M10 1.5l2.6 5.8 6.2.6-4.7 4.2 1.4 6.2L10 15.2l-5.5 3.1 1.4-6.2L1.2 7.9l6.2-.6z" />
+                  )}
+                </svg>
+              ))}
+            </span>
+            <span className="score">{GOOGLE_NOTE.toFixed(1).replace('.', ',')}/5</span>
+            <span className="sep"></span>
+            <span className="cnt">{GOOGLE_AVIS_COUNT} avis Google</span>
+          </a>
           <div className="hero-chips">
             <span className="chip"><span className="dot"></span>Viande 100% française</span>
             <span className="chip">Volaille en circuit court</span>

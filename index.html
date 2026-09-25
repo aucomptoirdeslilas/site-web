@@ -11,6 +11,34 @@
 <meta property="og:image" content="https://aucomptoirdeslilas.fr/assets/logo.png" />
 <meta property="og:url" content="https://aucomptoirdeslilas.fr/" />
 <meta property="og:type" content="website" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://aucomptoirdeslilas.fr/" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ButcherShop",
+  "name": "Au Comptoir Des Lilas",
+  "description": "Boucherie artisanale française : boucherie, charcuterie, traiteur et rôtisserie. Viande 100% française.",
+  "url": "https://aucomptoirdeslilas.fr/",
+  "image": "https://aucomptoirdeslilas.fr/assets/logo.png",
+  "telephone": "+33688504341",
+  "email": "bienvenue@aucomptoirdeslilas.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "122 rue de Paris",
+    "addressLocality": "Les Lilas",
+    "postalCode": "93260",
+    "addressCountry": "FR"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "10:00", "closes": "13:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "16:00", "closes": "19:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "13:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "16:00", "closes": "19:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "13:00" }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" />
@@ -797,7 +825,32 @@ html { cursor: none; }
 </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root">
+  <!-- Contenu lisible sans JavaScript (robots d'indexation / publicité). Remplacé par le site React au chargement. -->
+  <main style="max-width:720px;margin:0 auto;padding:48px 16px;font-family:var(--serif);color:var(--ink);line-height:1.6">
+    <img src="assets/logo.png" alt="Au Comptoir Des Lilas" style="max-width:160px;height:auto" />
+    <h1 style="font-family:var(--display)">Au Comptoir Des Lilas — Boucherie artisanale française</h1>
+    <p>Boucherie, charcuterie, traiteur et rôtisserie aux Lilas (93). Viande 100% française.</p>
+    <p>Manger de la bonne viande ne devrait pas être compliqué. C'est pour ça qu'on a créé Au Comptoir Des Lilas. Une boucherie où vous voyez l'artisan, où vous goûtez avant d'acheter, et où l'on vous cuisine ce que vous voyez.</p>
+    <h2 style="font-family:var(--display)">Nos métiers</h2>
+    <ul>
+      <li>Boucherie : bœuf (Blonde d'Aquitaine, Charolaise, Limousine), veau, agneau, volaille</li>
+      <li>Porc Noir de Bigorre et Porc Francilin</li>
+      <li>Charcuterie et traiteur</li>
+      <li>Rôtisserie</li>
+    </ul>
+    <h2 style="font-family:var(--display)">Horaires</h2>
+    <ul>
+      <li>Lundi : 10h – 13h, 16h – 19h30</li>
+      <li>Mardi – Samedi : 9h – 13h, 16h – 19h30</li>
+      <li>Dimanche : 9h – 13h</li>
+    </ul>
+    <h2 style="font-family:var(--display)">Nous trouver</h2>
+    <p>122 rue de Paris, 93260 Les Lilas<br />
+    Téléphone : <a href="tel:+33688504341">06 88 50 43 41</a><br />
+    E-mail : <a href="mailto:bienvenue@aucomptoirdeslilas.fr">bienvenue@aucomptoirdeslilas.fr</a></p>
+  </main>
+</div>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>

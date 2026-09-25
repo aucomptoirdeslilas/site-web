@@ -1615,7 +1615,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 
 <!-- Bandeau cookies : le pixel OpenAI Ads n'est chargé qu'après « Accepter » (RGPD / CNIL) -->
 <div class="consent" id="consent" role="dialog" aria-label="Cookies" hidden>
-  <p><strong>Cookies publicitaires.</strong> Avec votre accord, nous utilisons un traceur OpenAI Ads pour mesurer l'efficacité de nos publicités. Rien n'est déposé si vous refusez. Vous pouvez changer d'avis à tout moment via « Cookies » en bas de page.</p>
+  <p><strong>Cookies publicitaires.</strong> Avec votre accord, nous utilisons un traceur d'OpenAI pour mesurer l'efficacité de nos publicités. Rien n'est déposé si vous refusez. Vous pouvez changer d'avis à tout moment via « Cookies » en bas de page. <a href="/politique-cookies.html" style="color: inherit;">En savoir plus</a></p>
   <div class="consent-btns">
     <button type="button" data-consent="denied">Refuser</button>
     <button type="button" data-consent="granted">Accepter</button>
@@ -1653,13 +1653,34 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     save(v);
     box.hidden = true;
     if (v === 'granted') loadPixel();
-    else if (loaded) location.reload(); // retrait du consentement : on recharge la page sans le traceur
+    else if (loaded) {
+      // Retrait du consentement : le pixel supprime ses cookies, on les efface aussi par sécurité, puis on recharge sans le traceur
+      oaiq('consent', false);
+      removeOpenAICookies();
+      setTimeout(function () { location.reload(); }, 400);
+    }
   });
+  function removeOpenAICookies() {
+    ['__oppref', '__obref'].forEach(function (name) {
+      var past = '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      document.cookie = name + past;
+      document.cookie = name + past + '; domain=' + location.hostname;
+      document.cookie = name + past + '; domain=.' + location.hostname.replace(/^www\./, '');
+    });
+  }
   window.acdlCookies = { open: function () { box.hidden = false; } };
 
   var choice = read();
   if (choice === 'granted') loadPixel();
-  else if (choice !== 'denied') box.hidden = false;
+  else {
+    if (choice === 'denied') removeOpenAICookies();
+    else box.hidden = false;
+  }
+  // Lien « Modifier mon choix » depuis la page politique cookies
+  if (location.hash === '#cookies') {
+    box.hidden = false;
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  }
 })();
 </script>
 </body>

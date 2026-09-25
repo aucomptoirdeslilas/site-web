@@ -3,14 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Au Comptoir Des Lilas</title>
-<meta name="description" content="Boucherie, charcuterie, traiteur, rotisserie - Au Comptoir Des Lilas, votre artisan boucher. Viande 100% francaise." />
+<title>Au Comptoir Des Lilas – Boucherie artisanale aux Lilas (93)</title>
+<meta name="description" content="Boucherie artisanale aux Lilas (93260) : viande 100% française, charcuterie, traiteur et rôtisserie. Porc Noir de Bigorre, bœuf Charolais et Limousin. 122 rue de Paris, ouvert 7j/7." />
 <link rel="icon" type="image/png" href="flavicon.png" />
 <meta property="og:title" content="Au Comptoir Des Lilas" />
 <meta property="og:description" content="Boucherie, Charcuterie, Traiteur, Rotisserie - Viande 100% francaise" />
 <meta property="og:image" content="https://aucomptoirdeslilas.fr/assets/logo.png" />
 <meta property="og:url" content="https://aucomptoirdeslilas.fr/" />
 <meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:site_name" content="Au Comptoir Des Lilas" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://aucomptoirdeslilas.fr/" />
 <script type="application/ld+json">
@@ -113,6 +116,7 @@ html[data-dir="b"] {
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
@@ -828,7 +832,7 @@ html { cursor: none; }
 <div id="root">
   <!-- Contenu lisible sans JavaScript (robots d'indexation / publicité). Remplacé par le site React au chargement. -->
   <main style="max-width:720px;margin:0 auto;padding:48px 16px;font-family:var(--serif);color:var(--ink);line-height:1.6">
-    <img src="assets/logo.png" alt="Au Comptoir Des Lilas" style="max-width:160px;height:auto" />
+    <img src="assets/logo-web.png" alt="Au Comptoir Des Lilas" style="max-width:160px;height:auto" />
     <h1 style="font-family:var(--display)">Au Comptoir Des Lilas — Boucherie artisanale française</h1>
     <p>Boucherie, charcuterie, traiteur et rôtisserie aux Lilas (93). Viande 100% française.</p>
     <p>Manger de la bonne viande ne devrait pas être compliqué. C'est pour ça qu'on a créé Au Comptoir Des Lilas. Une boucherie où vous voyez l'artisan, où vous goûtez avant d'acheter, et où l'on vous cuisine ce que vous voyez.</p>
@@ -851,8 +855,8 @@ html { cursor: none; }
     E-mail : <a href="mailto:bienvenue@aucomptoirdeslilas.fr">bienvenue@aucomptoirdeslilas.fr</a></p>
   </main>
 </div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 <script type="text/babel" data-presets="react">
 /* Au Comptoir Des Lilas — site (design v4 · Direction B) */
@@ -888,31 +892,31 @@ const FILIERES = [
   {
     name: 'Le Porc Noir de Bigorre',
     meta: 'Race ancestrale · Pyrénées',
-    img: 'assets/porc-noir-de-bigorre.png',
+    img: 'assets/porc-noir-de-bigorre.jpg',
     text: "Une race ancestrale, sauvée de l'oubli, élevée en plein air au pied des Pyrénées. Le Porc Noir de Bigorre grandit lentement, se nourrit de glands et de châtaignes, et nous offre une viande persillée, dense, au goût affirmé qu'aucun élevage industriel ne sait reproduire. Nous sommes fiers d'être la seule boucherie artisanale de Seine-Saint-Denis (93) à la commercialiser : une pièce rare, pour ceux qui cherchent le vrai goût du terroir.",
   },
   {
     name: 'Le Porc Francilin',
     meta: 'Paris Terroirs · Île-de-France',
-    img: 'assets/porc-francilin.png',
+    img: 'assets/porc-francilin.jpg',
     text: "Le goût de notre terroir, la santé en plus. Découvrez le Porc Francilin par Paris Terroirs : une filière 100% locale, née et élevée au cœur du Bassin Parisien. Nourri aux graines de lin pour une viande tendre et naturellement riche en Oméga-3, c'est le choix d'une charcuterie d'excellence, sans OGM, qui soutient directement nos éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
   },
   {
     name: "Le Bœuf Blonde d'Aquitaine",
     meta: 'Race à viande · Sud-Ouest',
-    img: 'assets/blonde-aquitaine.png',
+    img: 'assets/blonde-aquitaine.jpg',
     text: "Élevée en plein air dans les pâturages du Sud-Ouest, la Blonde d'Aquitaine est réputée pour sa viande tendre, peu grasse et généreusement persillée. Une race rustique, élevée avec patience, qui donne des pièces au goût franc et à la texture fondante. Le choix des connaisseurs pour une côte de bœuf ou un rôti d'exception.",
   },
   {
     name: 'Le Bœuf Charolais',
     meta: 'Race à viande · Bourgogne',
-    img: 'assets/charolaise.png',
+    img: 'assets/charolaise.jpg',
     text: "Robe blanche, réputation dorée : la Charolaise est l'une des races à viande les plus recherchées de France. Élevée à l'herbe dans les prairies de Bourgogne, elle offre une viande ferme, savoureuse et bien persillée, qui a fait la renommée de la boucherie française bien au-delà de nos frontières.",
   },
   {
     name: 'Le Bœuf Limousin',
     meta: 'Race à viande · Limousin',
-    img: 'assets/limousine.png',
+    img: 'assets/limousine.jpg',
     text: "Originaire des pâturages vallonnés du Limousin, cette race rustique élevée en plein air produit une viande tendre, juteuse et fine en bouche. Reconnue Label Rouge pour sa qualité constante, la Limousine est un incontournable de la boucherie traditionnelle, pour les amateurs de viande au goût authentique.",
   },
 ];
@@ -1067,7 +1071,7 @@ function Nav({ shrink, hidden, active, onJump }) {
           ))}
         </div>
         <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); onJump('hero'); }}>
-          <img src="assets/logo.png" alt="Au Comptoir Des Lilas" />
+          <img src="assets/logo-web.png" alt="Au Comptoir Des Lilas" />
         </a>
         <div className="nav-links nav-links-r">
           {right.map(n => (
@@ -1097,6 +1101,7 @@ function Hero({ y, onJump }) {
             Boucherie artisanale française
           </p>
           <h1>
+            <span className="sr-only">Au Comptoir Des Lilas, boucherie artisanale aux Lilas (93) — </span>
             <span className="ln"><span style={{ animationDelay: '.05s' }}>Le billot,</span></span>
             <span className="ln"><span style={{ animationDelay: '.15s' }}>le <span className="em">geste</span>,</span></span>
             <span className="ln"><span style={{ animationDelay: '.25s' }}>vous dégustez.</span></span>
@@ -1186,7 +1191,7 @@ function Maison({ onJump }) {
         <div className="maison-figure">
           <div className="sticky">
             <div className="figure">
-              <img src="assets/photo-fondateur.png" alt="Ulysse Campiglia, Artisan Boucher" />
+              <img src="assets/photo-fondateur.jpg" alt="Ulysse Campiglia, Artisan Boucher" />
               <div className="cap">
                 <span>Ulysse Campiglia</span>
                 <span className="em">artisan boucher</span>
@@ -1278,7 +1283,7 @@ function Selection() {
             <article key={f.name} className="filiere" data-cursor="En boutique">
               <div className="filiere-media">
                 {f.tag && <span className="pill">{f.tag}</span>}
-                <img src={f.img} alt={f.name} loading="lazy" />
+                <img src={f.img} alt={`${f.name} – viande française, boucherie Au Comptoir Des Lilas`} loading="lazy" />
               </div>
               <div className="filiere-body">
                 <span className="meta">{f.meta}</span>
@@ -1482,7 +1487,7 @@ function Footer({ onJump }) {
         <div className="footer-grid">
           <div>
             <div className="footer-brand">
-              <img src="assets/logo.png" alt="" />
+              <img src="assets/logo-web.png" alt="Logo Au Comptoir Des Lilas" loading="lazy" />
               <div className="t">Au Comptoir<br />des <span>Lilas</span></div>
             </div>
             <p className="note">Boucherie · charcuterie · traiteur · rôtisserie. Votre artisan boucher, viande 100% française.</p>
@@ -1494,7 +1499,8 @@ function Footer({ onJump }) {
           <div className="footer-col">
             <h5>Visiter</h5>
             <a href={MAPS_DIR} target="_blank" rel="noopener">{ADRESSE}</a>
-            <a>Lun–Sam : 9h – 19h30</a>
+            <a>Lundi : 10h – 13h, 16h – 19h30</a>
+            <a>Mar–Sam : 9h – 13h, 16h – 19h30</a>
             <a>Dimanche : 9h – 13h</a>
             <a href={TEL_HREF}>{TEL_DISPLAY}</a>
           </div>

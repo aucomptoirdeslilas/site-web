@@ -830,6 +830,25 @@ html { cursor: none; }
   .hero h1 .ln { overflow: visible; }
   .hero h1 .ln > span { transform: none !important; animation: none !important; }
 }
+
+/* ---------- bandeau cookies (consentement) ---------- */
+.consent {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 150;
+  max-width: 560px; margin: 0 auto; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  background: var(--ink); color: var(--bg); border-radius: var(--r-lg);
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,.55);
+  font-family: var(--serif); font-size: 15px; line-height: 1.45;
+}
+.consent[hidden] { display: none; }
+.consent p { margin: 0; }
+.consent-btns { display: flex; gap: 10px; justify-content: flex-end; }
+.consent-btns button {
+  flex: 0 1 140px; padding: 11px 18px; border-radius: 999px;
+  font-family: var(--ui); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--bg); color: var(--ink); border: 1px solid var(--bg); cursor: inherit;
+}
+@media (max-width: 480px) { .consent-btns button { flex: 1; } }
 </style>
 </head>
 <body>
@@ -1520,7 +1539,7 @@ function Footer({ onJump }) {
         </div>
         <div className="footer-bot">
           <span>© Au Comptoir des Lilas · Tous droits réservés</span>
-          <span>Mentions légales · CGV · Cookies</span>
+          <span>Mentions légales · CGV · <a href="#" onClick={(e) => { e.preventDefault(); if (window.acdlCookies) window.acdlCookies.open(); }} style={{ color: 'inherit' }}>Cookies</a></span>
         </div>
       </div>
     </footer>
@@ -1592,6 +1611,56 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<!-- Bandeau cookies : le pixel OpenAI Ads n'est chargé qu'après « Accepter » (RGPD / CNIL) -->
+<div class="consent" id="consent" role="dialog" aria-label="Cookies" hidden>
+  <p><strong>Cookies publicitaires.</strong> Avec votre accord, nous utilisons un traceur OpenAI Ads pour mesurer l'efficacité de nos publicités. Rien n'est déposé si vous refusez. Vous pouvez changer d'avis à tout moment via « Cookies » en bas de page.</p>
+  <div class="consent-btns">
+    <button type="button" data-consent="denied">Refuser</button>
+    <button type="button" data-consent="granted">Accepter</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = 'acdl-consent';
+  var MAX_AGE = 1000 * 60 * 60 * 24 * 180; // on redemande au bout de 6 mois (recommandation CNIL)
+  var box = document.getElementById('consent');
+  var loaded = false;
+
+  function read() {
+    try { var c = JSON.parse(localStorage.getItem(KEY)); if (c && Date.now() - c.t < MAX_AGE) return c.v; } catch (e) {}
+    return null;
+  }
+  function save(v) {
+    try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {}
+  }
+  function loadPixel() {
+    if (loaded) return;
+    loaded = true;
+    window.oaiq = window.oaiq || function () { (window.oaiq.q = window.oaiq.q || []).push(arguments); };
+    oaiq('init', { pixelId: '3tHyWiV5iaK1T2MozMQat1' });
+    oaiq('measure', 'page_viewed', { type: 'contents' });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://bzrcdn.openai.com/sdk/oaiq.min.js';
+    document.head.appendChild(s);
+  }
+
+  box.addEventListener('click', function (e) {
+    var v = e.target.getAttribute('data-consent');
+    if (!v) return;
+    save(v);
+    box.hidden = true;
+    if (v === 'granted') loadPixel();
+    else if (loaded) location.reload(); // retrait du consentement : on recharge la page sans le traceur
+  });
+  window.acdlCookies = { open: function () { box.hidden = false; } };
+
+  var choice = read();
+  if (choice === 'granted') loadPixel();
+  else if (choice !== 'denied') box.hidden = false;
+})();
 </script>
 </body>
 </html>

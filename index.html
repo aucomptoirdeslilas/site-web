@@ -872,7 +872,29 @@ html { cursor: none; }
   .cta-flottant .tel-label { display: none; }
   .cta-flottant .tel-num { display: inline; }
 }
+
+/* ---------- écran de chargement ----------
+   Le texte de secours dans #root reste dans le HTML (moteurs de recherche, navigateurs sans JS)
+   mais est masqué aux visiteurs pendant que React se charge : seul le logo s'affiche sur le fond du site. */
+html.chargement #root > main { visibility: hidden; }
+html.chargement body::before {
+  content: ''; position: fixed; inset: 0; z-index: 1;
+  background: url(assets/logo-web.png) center / 120px auto no-repeat;
+  animation: chargement-pulse 1.4s ease-in-out infinite alternate;
+}
+@keyframes chargement-pulse { from { opacity: .35; } to { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { html.chargement body::before { animation: none; opacity: .8; } }
 </style>
+<script>
+  // Mode chargement uniquement si le JavaScript tourne (sans JS, le texte de secours reste visible)
+  document.documentElement.classList.add('chargement');
+  // Filet de sécurité : si React ne s'affiche pas (CDN bloqué, erreur…), on montre le texte de secours
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      if (document.querySelector('#root > main')) document.documentElement.classList.remove('chargement');
+    }, 3000);
+  });
+</script>
 </head>
 <body>
 <div id="root">
@@ -901,6 +923,8 @@ html { cursor: none; }
     E-mail : <a href="mailto:bienvenue@aucomptoirdeslilas.fr">bienvenue@aucomptoirdeslilas.fr</a></p>
   </main>
 </div>
+<!-- Ces 3 scripts servent quand on ouvre ce fichier tel quel. À la publication (GitHub Actions, scripts/build.mjs),
+     le code React ci-dessous est converti d'avance, Babel est retiré et React est servi depuis le site. -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
@@ -1605,6 +1629,7 @@ function App() {
   const lastY = useRef(0);
 
   useEffect(() => { document.documentElement.setAttribute('data-dir', 'b'); }, []);
+  useEffect(() => { document.documentElement.classList.remove('chargement'); }, []); // la vraie page est affichée : fin de l'écran de chargement
 
   useEffect(() => {
     const measure = () => {

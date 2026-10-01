@@ -1639,6 +1639,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     if (loaded) return;
     loaded = true;
     window.oaiq = window.oaiq || function () { (window.oaiq.q = window.oaiq.q || []).push(arguments); };
+    oaiq('consent', true); // efface un éventuel refus mémorisé par le pixel (visiteur qui avait refusé puis accepte)
     oaiq('init', { pixelId: '3tHyWiV5iaK1T2MozMQat1' });
     oaiq('measure', 'page_viewed', { type: 'contents' });
     var s = document.createElement('script');

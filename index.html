@@ -42,6 +42,7 @@
   ]
 }
 </script>
+<link rel="preload" as="image" href="assets/pub-poster.jpg" fetchpriority="high" /><!-- image d'accueil, prête avant la vidéo -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" />
@@ -1155,14 +1156,31 @@ function Nav({ shrink, hidden, active, onJump }) {
 }
 
 /* ----------------------------- hero ----------------------------- */
+const HERO_POSTER = 'assets/pub-poster.jpg';
+// Vidéo d'accueil adaptée au visiteur : image fixe seule si économiseur de données, connexion très lente (2G)
+// ou animations réduites ; version légère (480p) sur téléphone ou en 3G ; version 720p sinon.
+function choisirVideoHero() {
+  const reseau = navigator.connection || {};
+  const media = (q) => !!(window.matchMedia && window.matchMedia(q).matches);
+  if (reseau.saveData || /2g$/.test(reseau.effectiveType || '') || media('(prefers-reduced-motion: reduce)')) return null;
+  if (reseau.effectiveType === '3g' || media('(max-width: 768px)')) return 'assets/pub-mobile.mp4';
+  return 'assets/pub.mp4';
+}
+
 function Hero({ y, onJump }) {
+  const video = useMemo(choisirVideoHero, []);
+  const parallaxe = { transform: `translate3d(0, ${y * 0.10}px, 0) scale(1.06)` };
   return (
     <section className="hero" id="hero">
-      <video className="hero-video" autoPlay muted loop playsInline preload="auto"
-             ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
-             style={{ transform: `translate3d(0, ${y * 0.10}px, 0) scale(1.06)` }}>
-        <source src="assets/pub.mp4" type="video/mp4" />
-      </video>
+      {video ? (
+        <video className="hero-video" autoPlay muted loop playsInline preload="auto" poster={HERO_POSTER}
+               ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
+               style={parallaxe}>
+          <source src={video} type="video/mp4" />
+        </video>
+      ) : (
+        <img className="hero-video" src={HERO_POSTER} alt="" style={parallaxe} />
+      )}
       <div className="hero-veil"></div>
       <div className="hero-inner">
         <div>

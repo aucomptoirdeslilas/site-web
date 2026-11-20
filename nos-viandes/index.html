@@ -14,9 +14,8 @@
 <meta property="og:locale" content="fr_FR" />
 <meta property="og:site_name" content="Au Comptoir Des Lilas" />
 <link rel="icon" type="image/png" href="/flavicon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" />
+<link rel="preload" href="/assets/fonts/bricolage-grotesque-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/fonts.css" />
 <link rel="stylesheet" href="/assets/pages.css" />
 <script type="application/ld+json">
 {
@@ -48,7 +47,7 @@
   <h1>Nos viandes</h1>
   <p class="lead">Pas de catalogue à rallonge : quelques races qu'on connaît bien, des éleveurs qu'on sait retrouver, et une vitrine qui bouge au fil des arrivages.</p>
 
-  <p>Chez nous, toute la viande est française, avec une origine qu'on peut vous raconter : la race, la région, la façon dont la bête a été élevée. Bœuf, veau, agneau, porc, volaille, et selon la saison du cheval, du gibier ou quelques viandes plus rares. Tout est découpé ici, devant vous, à l'épaisseur que vous voulez.</p>
+  <p>Chez nous, toute la viande est française, avec une origine qu'on peut vous raconter : la race, la région, la façon dont la bête a été élevée. Bœuf, veau, agneau, porc et volaille. Tout est découpé ici, devant vous, à l'épaisseur que vous voulez.</p>
 
   <h2>Le bœuf : trois races, trois caractères</h2>
   <div class="races">
@@ -61,19 +60,19 @@
       </div>
     </article>
     <article class="race">
-      <img src="/assets/charolaise.jpg" alt="Bœuf Charolais dans une prairie de Bourgogne" loading="lazy" width="400" height="300" />
+      <img src="/assets/charolaise.jpg" alt="Bœuf de race Charolaise" loading="lazy" width="400" height="300" />
       <div>
         <span class="meta">Bourgogne</span>
         <h3>Charolaise</h3>
-        <p>La grande classique de la boucherie française. Élevée à l'herbe, elle donne une viande ferme et goûteuse, parfaite pour les grillades comme pour les plats mijotés.</p>
+        <p>La grande classique de la boucherie française, originaire de Bourgogne. Elle donne une viande ferme et goûteuse, parfaite pour les grillades comme pour les plats mijotés.</p>
       </div>
     </article>
     <article class="race">
-      <img src="/assets/limousine.jpg" alt="Bœuf Limousin élevé en plein air" loading="lazy" width="400" height="300" />
+      <img src="/assets/limousine.jpg" alt="Bœuf de race Limousine" loading="lazy" width="400" height="300" />
       <div>
         <span class="meta">Limousin</span>
         <h3>Limousine</h3>
-        <p>Fine, juteuse, très régulière. Une race rustique élevée en plein air, qu'on aime pour les pièces à griller et les tartares.</p>
+        <p>Fine, juteuse, très régulière. Une race rustique originaire du Limousin, qu'on aime pour les pièces à griller et les tartares.</p>
       </div>
     </article>
   </div>
@@ -93,13 +92,13 @@
       <div>
         <span class="meta">Île-de-France</span>
         <h3>Porc Francilin</h3>
-        <p>Né et élevé dans le Bassin parisien par la filière Paris Terroirs, nourri aux graines de lin, sans OGM. Une viande tendre et un circuit court qui fait vivre des éleveurs d'ici.</p>
+        <p>Né et élevé dans le Bassin parisien par la filière Paris Terroirs, nourri avec des graines de lin. Une viande tendre et un circuit court qui fait vivre des éleveurs d'ici.</p>
       </div>
     </article>
   </div>
 
   <h2>Veau, agneau, volaille</h2>
-  <p>Le veau et l'agneau suivent les saisons et les arrivages. Pour la volaille, on travaille des bêtes entières d'origine Île-de-France : on les découpe à la demande, on les désosse, on les farcit si vous voulez.</p>
+  <p>Le veau et l'agneau suivent les saisons et les arrivages. Pour la volaille, on travaille des bêtes entières, toutes françaises, dont une partie élevée en Île-de-France : on les découpe à la demande, on les désosse, on les farcit si vous voulez.</p>
 
   <h2>Ce qu'on fait pour vous au comptoir</h2>
   <p>Demandez, c'est notre métier : une côte épaisse pour quatre, un rôti ficelé, une viande hachée minute, des brochettes pour le barbecue, ou simplement un conseil de cuisson. Vous pouvez aussi goûter avant d'acheter. Pour une grosse pièce ou une quantité précise, un coup de fil la veille et c'est prêt quand vous passez.</p>
@@ -115,7 +114,7 @@
   <aside class="voir-aussi">
     <strong>À voir aussi</strong>
     <ul>
-      <li><a href="/rotisserie/">La rôtisserie : poulets fermiers à la broche →</a></li>
+      <li><a href="/rotisserie/">La rôtisserie : poulets rôtis à la broche →</a></li>
       <li><a href="/traiteur/">Traiteur et charcuterie →</a></li>
     </ul>
   </aside>
@@ -139,7 +138,7 @@
       <strong>Le site</strong>
       <p><a href="/">Accueil</a></p>
       <p><a href="/nos-viandes/">Nos viandes</a> · <a href="/traiteur/">Traiteur</a> · <a href="/rotisserie/">Rôtisserie</a></p>
-      <p><a href="/acces-horaires/">Accès &amp; horaires</a> · <a href="/politique-cookies.html">Cookies</a></p>
+      <p><a href="/acces-horaires/">Accès &amp; horaires</a> · <a href="/mentions-legales.html">Mentions légales</a> · <a href="/politique-cookies.html">Cookies</a></p>
     </div>
   </div>
 </footer>

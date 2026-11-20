@@ -58,9 +58,8 @@
 }
 </script>
 <link rel="preload" as="image" href="assets/pub-poster.jpg" fetchpriority="high" /><!-- image d'accueil, prête avant la vidéo -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" />
+<link rel="preload" href="/assets/fonts/bricolage-grotesque-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/fonts.css" />
 <style>
 /* =================================================================
    AU COMPTOIR DES LILAS — design system
@@ -627,6 +626,19 @@ html[data-dir="b"] .contact-card h3 { font-weight: 500; }
   width: 100%; height: 100%; border: 0; display: block;
   filter: grayscale(.3) contrast(1.05);
 }
+/* Carte chargée seulement après clic (Google Maps dépose des cookies) */
+.map-consent {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; padding: 24px 16px 96px; text-align: center; background: var(--surface);
+}
+.map-consent .adr { font-family: var(--display); font-weight: 800; font-size: clamp(20px, 2.4vw, 28px); letter-spacing: -.01em; color: var(--ink); }
+.map-consent button {
+  font-family: var(--ui); font-weight: 600; font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 13px 22px; border-radius: 999px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.map-consent button:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.map-consent .note { margin: 0; max-width: 42ch; font-family: var(--serif); font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
 .map-pin {
   position: absolute; left: 50%; bottom: 28px;
   transform: translateX(-50%);
@@ -924,7 +936,7 @@ html.chargement body::before {
     <ul>
       <li><a href="/nos-viandes/">Nos viandes</a> : bœuf (Blonde d'Aquitaine, Charolaise, Limousine), veau, agneau, volaille, Porc Noir de Bigorre et Porc Francilin</li>
       <li><a href="/traiteur/">Charcuterie et traiteur</a> : plats du jour, plateaux pour vos réceptions</li>
-      <li><a href="/rotisserie/">Rôtisserie</a> : poulets fermiers à la broche</li>
+      <li><a href="/rotisserie/">Rôtisserie</a> : poulets rôtis à la broche</li>
     </ul>
     <h2 style="font-family:var(--display)">Horaires</h2>
     <ul>
@@ -968,11 +980,11 @@ const NAV = [
 
 const METIERS = [
   { n: '01', t: 'Boucherie', sub: '', v: 'assets/boucherie.mp4', page: '/nos-viandes/',
-    d: "Bœuf, veau, agneau, porc, cheval, gibier ou viandes exotiques : chaque pièce choisie avec soin et découpée sous vos yeux. Viande 100% française, origine certifiée et traçable." },
+    d: "Bœuf, veau, agneau, porc et volaille : chaque pièce choisie avec soin et découpée sous vos yeux. Viande 100% française, origine tracée." },
   { n: '02', t: 'Charcuterie & traiteur', sub: '', v: 'assets/charcuterie-traiteur.mp4', page: '/traiteur/',
     d: "Charcuterie et traiteur de maisons reconnues. Traiteur : plats cuisinés, sandwichs chauds, cassoulet, bowls du jour." },
   { n: '03', t: 'Rôtisserie', sub: '', subAfter: 'à la broche', v: 'assets/rotisserie.mp4', page: '/rotisserie/',
-    d: "Poulets fermiers élevés en plein air, rôtis devant vous. Cuisson lente à la broche, épices et marinades." },
+    d: "Poulets français rôtis devant vous. Cuisson lente à la broche, épices et marinades." },
 ];
 
 const FILIERES = [
@@ -986,25 +998,25 @@ const FILIERES = [
     name: 'Le Porc Francilin',
     meta: 'Paris Terroirs · Île-de-France',
     img: 'assets/porc-francilin.jpg',
-    text: "Le goût de notre terroir, la santé en plus. Découvrez le Porc Francilin par Paris Terroirs : une filière 100% locale, née et élevée au cœur du Bassin Parisien. Nourri aux graines de lin pour une viande tendre et naturellement riche en Oméga-3, c'est le choix d'une charcuterie d'excellence, sans OGM, qui soutient directement nos éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
+    text: "Le goût de notre terroir. Découvrez le Porc Francilin par Paris Terroirs : une filière locale, née et élevée au cœur du Bassin Parisien. Nourri avec des graines de lin, il donne une viande tendre et savoureuse, et c'est un choix qui soutient directement les éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
   },
   {
     name: "Le Bœuf Blonde d'Aquitaine",
     meta: 'Race à viande · Sud-Ouest',
     img: 'assets/blonde-aquitaine.jpg',
-    text: "Élevée en plein air dans les pâturages du Sud-Ouest, la Blonde d'Aquitaine est réputée pour sa viande tendre, peu grasse et généreusement persillée. Une race rustique, élevée avec patience, qui donne des pièces au goût franc et à la texture fondante. Le choix des connaisseurs pour une côte de bœuf ou un rôti d'exception.",
+    text: "Race originaire du Sud-Ouest, la Blonde d'Aquitaine est réputée pour sa viande tendre, peu grasse et généreusement persillée. Une race rustique, qui donne des pièces au goût franc et à la texture fondante. Le choix des connaisseurs pour une côte de bœuf ou un rôti d'exception.",
   },
   {
     name: 'Le Bœuf Charolais',
     meta: 'Race à viande · Bourgogne',
     img: 'assets/charolaise.jpg',
-    text: "Robe blanche, réputation dorée : la Charolaise est l'une des races à viande les plus recherchées de France. Élevée à l'herbe dans les prairies de Bourgogne, elle offre une viande ferme, savoureuse et bien persillée, qui a fait la renommée de la boucherie française bien au-delà de nos frontières.",
+    text: "Robe blanche, réputation dorée : la Charolaise est l'une des races à viande les plus recherchées de France. Originaire de Bourgogne, elle offre une viande ferme, savoureuse et bien persillée, qui a fait la renommée de la boucherie française bien au-delà de nos frontières.",
   },
   {
     name: 'Le Bœuf Limousin',
     meta: 'Race à viande · Limousin',
     img: 'assets/limousine.jpg',
-    text: "Originaire des pâturages vallonnés du Limousin, cette race rustique élevée en plein air produit une viande tendre, juteuse et fine en bouche. Reconnue Label Rouge pour sa qualité constante, la Limousine est un incontournable de la boucherie traditionnelle, pour les amateurs de viande au goût authentique.",
+    text: "Originaire des pâturages vallonnés du Limousin, cette race rustique produit une viande tendre, juteuse et fine en bouche. Appréciée pour sa qualité régulière, la Limousine est un incontournable de la boucherie traditionnelle, pour les amateurs de viande au goût authentique.",
   },
 ];
 
@@ -1242,7 +1254,7 @@ function Hero({ y, onJump }) {
           <div className="hero-chips">
             <span className="chip"><span className="dot"></span>Viande 100% française</span>
             <span className="chip">Porc Noir de Bigorre</span>
-            <span className="chip">Volaille entière origine Île-de-France</span>
+            <span className="chip">Volailles françaises, dont élevages d'Île-de-France</span>
           </div>
           <div className="hero-scroll-hint" onClick={() => onJump('maison')}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -1270,7 +1282,7 @@ function Marquee() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); };
   }, []);
-  const items = ['Boucherie', 'Charcuterie', 'Traiteur', 'Rôtisserie', 'Viande 100% française', 'Porc Noir de Bigorre', "Porc fermier d'origine Île-de-France", 'Volaille entière origine Île-de-France'];
+  const items = ['Boucherie', 'Charcuterie', 'Traiteur', 'Rôtisserie', 'Viande 100% française', 'Porc Noir de Bigorre', "Porc Francilin d'Île-de-France", "Volailles françaises, dont élevages d'Île-de-France"];
   const row = (k) => (
     <span key={k} style={{ display: 'inline-flex', gap: 40 }}>
       {items.map((it, i) => (
@@ -1420,7 +1432,7 @@ function FilmBand({ y, top, onJump }) {
         <div className="kicker reveal"><Mark />La rôtisserie, savoir-faire &amp; local</div>
         <h2 className="mask m2">Le goût d'<span className="em">autrefois</span>,<br />retrouvé.</h2>
         <div className="filmband-foot">
-          <p className="reveal d2">Le vrai goût de la volaille, comme autrefois chez le rôtisseur. Poulets fermiers, travers de porc mariné et bien d'autres, cuisson lente à la broche, pour que chaque bouchée raconte quelque chose.</p>
+          <p className="reveal d2">Le vrai goût de la volaille, comme autrefois chez le rôtisseur. Poulets, travers de porc mariné et bien d'autres, cuisson lente à la broche, pour que chaque bouchée raconte quelque chose.</p>
           <a href="#contact" className="btn btn-on-dark reveal d3" data-magnetic data-cursor="Nous écrire" onClick={(e) => { e.preventDefault(); onJump('contact'); }}>
             Nous rendre visite <span className="arr">→</span>
           </a>
@@ -1572,15 +1584,24 @@ function Contact() {
 
 /* ----------------------------- map ----------------------------- */
 function MapSection() {
+  // La carte Google n'est chargée qu'après un clic du visiteur : Google y dépose ses propres cookies.
+  const [carte, setCarte] = useState(false);
   return (
     <section className="map-section" id="visite">
       <div className="map-wrap">
-        <iframe
-          src="https://maps.google.com/maps?q=122%20rue%20de%20Paris%2C%20Les%20Lilas%2093260%2C%20France&t=&z=15&ie=UTF8&iwloc=&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Localisation Au Comptoir Des Lilas"
-        ></iframe>
+        {carte ? (
+          <iframe
+            src="https://maps.google.com/maps?q=122%20rue%20de%20Paris%2C%20Les%20Lilas%2093260%2C%20France&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Localisation Au Comptoir Des Lilas"
+          ></iframe>
+        ) : (
+          <div className="map-consent">
+            <span className="adr">{ADRESSE}</span>
+            <button type="button" onClick={() => setCarte(true)}>Afficher la carte</button>
+            <p className="note">La carte est fournie par Google Maps, qui peut déposer des cookies sur votre appareil une fois la carte affichée.</p>
+          </div>
+        )}
         <a className="map-pin" href="https://www.google.com/maps/dir/?api=1&destination=122+rue+de+Paris,+Les+Lilas+93260,+France" target="_blank" rel="noopener">
           <span className="ic">🧭</span>
           Cliquez pour obtenir l'itinéraire
@@ -1631,7 +1652,7 @@ function Footer({ onJump }) {
         </div>
         <div className="footer-bot">
           <span>© Au Comptoir des Lilas · Tous droits réservés</span>
-          <span>Mentions légales · CGV · <a href="#" onClick={(e) => { e.preventDefault(); if (window.acdlCookies) window.acdlCookies.open(); }} style={{ color: 'inherit' }}>Cookies</a></span>
+          <span><a href="/mentions-legales.html" style={{ color: 'inherit' }}>Mentions légales</a> · <a href="#" onClick={(e) => { e.preventDefault(); if (window.acdlCookies) window.acdlCookies.open(); }} style={{ color: 'inherit' }}>Cookies</a></span>
         </div>
       </div>
     </footer>

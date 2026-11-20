@@ -14,9 +14,8 @@
 <meta property="og:locale" content="fr_FR" />
 <meta property="og:site_name" content="Au Comptoir Des Lilas" />
 <link rel="icon" type="image/png" href="/flavicon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" />
+<link rel="preload" href="/assets/fonts/bricolage-grotesque-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/fonts.css" />
 <link rel="stylesheet" href="/assets/pages.css" />
 <script type="application/ld+json">
 {
@@ -65,9 +64,25 @@
   <h2>On vient de partout autour</h2>
   <p>Beaucoup de nos clients habitent les Lilas, bien sûr, mais aussi Romainville, Bagnolet, Le Pré-Saint-Gervais ou les 19e et 20e arrondissements de Paris, juste de l'autre côté du périphérique. Si vous cherchez une boucherie artisanale en Seine-Saint-Denis qui ne soit pas trop loin de Paris, vous êtes au bon endroit.</p>
 
-  <div class="map">
-    <iframe src="https://maps.google.com/maps?q=122%20rue%20de%20Paris%2C%20Les%20Lilas%2093260%2C%20France&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Plan : Au Comptoir Des Lilas, 122 rue de Paris, Les Lilas"></iframe>
+  <!-- La carte Google n'est chargée qu'après un clic du visiteur : Google y dépose ses propres cookies. -->
+  <div class="map" id="carte">
+    <div class="map-consent">
+      <span class="adr">122 rue de Paris, Les Lilas</span>
+      <button type="button" id="afficher-carte">Afficher la carte</button>
+      <p class="note">La carte est fournie par Google Maps, qui peut déposer des cookies sur votre appareil une fois la carte affichée.</p>
+    </div>
   </div>
+  <script>
+    document.getElementById('afficher-carte').addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://maps.google.com/maps?q=122%20rue%20de%20Paris%2C%20Les%20Lilas%2093260%2C%20France&t=&z=15&ie=UTF8&iwloc=&output=embed';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.title = 'Plan : Au Comptoir Des Lilas, 122 rue de Paris, Les Lilas';
+      var c = document.getElementById('carte');
+      c.innerHTML = '';
+      c.appendChild(f);
+    });
+  </script>
 
   <section class="cta">
     <p>Une question avant de venir, une commande à préparer ?</p>
@@ -104,7 +119,7 @@
       <strong>Le site</strong>
       <p><a href="/">Accueil</a></p>
       <p><a href="/nos-viandes/">Nos viandes</a> · <a href="/traiteur/">Traiteur</a> · <a href="/rotisserie/">Rôtisserie</a></p>
-      <p><a href="/acces-horaires/">Accès &amp; horaires</a> · <a href="/politique-cookies.html">Cookies</a></p>
+      <p><a href="/acces-horaires/">Accès &amp; horaires</a> · <a href="/mentions-legales.html">Mentions légales</a> · <a href="/politique-cookies.html">Cookies</a></p>
     </div>
   </div>
 </footer>

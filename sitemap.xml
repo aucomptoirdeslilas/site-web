@@ -2,5 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://aucomptoirdeslilas.fr/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://aucomptoirdeslilas.fr/nos-viandes/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://aucomptoirdeslilas.fr/traiteur/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://aucomptoirdeslilas.fr/rotisserie/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://aucomptoirdeslilas.fr/acces-horaires/</loc>
+    <lastmod>2026-11-20</lastmod>
   </url>
 </urlset>

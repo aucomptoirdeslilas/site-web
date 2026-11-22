@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Au Comptoir Des Lilas – Boucherie artisanale aux Lilas, rue de Paris (93)</title>
-<meta name="description" content="Votre boucherie aux Lilas : viande 100% française, Porc Noir de Bigorre, charcuterie, traiteur et poulets rôtis. 122 rue de Paris, près du métro Mairie des Lilas. Ouvert 7j/7." />
+<title>Au Comptoir Des Lilas – Boucherie aux Lilas, Porc Noir de Bigorre</title>
+<meta name="description" content="Porc Noir de Bigorre, Porc Francilin et viande 100% française dans votre boucherie aux Lilas. Charcuterie, traiteur, poulets rôtis. 122 rue de Paris, métro Mairie des Lilas. Ouvert 7j/7." />
 <link rel="icon" type="image/png" href="flavicon.png" />
 <meta property="og:title" content="Au Comptoir Des Lilas" />
 <meta property="og:description" content="Boucherie, Charcuterie, Traiteur, Rotisserie - Viande 100% francaise" />
@@ -524,6 +524,8 @@ html[data-dir="a"] .filiere-body h4 { text-transform: uppercase; }
 html[data-dir="b"] .filiere-body h4 { font-weight: 500; }
 .filiere-body .meta { font-family: var(--ui); font-weight: 600; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
 .filiere-body p { font-family: var(--ui); font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+.filiere-lien { align-self: flex-start; margin-top: 4px; font-family: var(--ui); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+.filiere-lien:hover { text-decoration: underline; }
 .filiere-more { display: none; align-self: flex-start; margin-top: 2px; padding: 0; background: none; border: 0; font-family: var(--ui); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); cursor: pointer; }
 @media (max-width: 820px) { .filieres { grid-template-columns: 1fr; } }
 
@@ -934,6 +936,8 @@ html.chargement body::before {
     <p>Manger de la bonne viande ne devrait pas être compliqué. C'est pour ça qu'on a créé Au Comptoir Des Lilas. Une boucherie où vous voyez l'artisan, où vous goûtez avant d'acheter, et où l'on vous cuisine ce que vous voyez.</p>
     <h2 style="font-family:var(--display)">Nos métiers</h2>
     <ul>
+      <li><a href="/porc-noir-de-bigorre/">Porc Noir de Bigorre</a> : la race rare des Pyrénées, seule boucherie artisanale du 93 à la proposer</li>
+      <li><a href="/porc-francilin/">Porc Francilin</a> : le porc né et élevé en Île-de-France</li>
       <li><a href="/nos-viandes/">Nos viandes</a> : bœuf (Blonde d'Aquitaine, Charolaise, Limousine), veau, agneau, volaille, Porc Noir de Bigorre et Porc Francilin</li>
       <li><a href="/traiteur/">Charcuterie et traiteur</a> : plats du jour, plateaux pour vos réceptions</li>
       <li><a href="/rotisserie/">Rôtisserie</a> : poulets rôtis à la broche</li>
@@ -969,7 +973,7 @@ const ADRESSE = '122 rue de Paris, Les Lilas 93260';
 const MAPS_DIR = 'https://www.google.com/maps/dir/?api=1&destination=122+rue+de+Paris,+Les+Lilas+93260,+France';
 const GOOGLE_AVIS = 'https://www.google.com/maps/search/?api=1&query=Au+Comptoir+Des+Lilas+122+rue+de+Paris+Les+Lilas+93260';
 const GOOGLE_NOTE = 4.6;
-const GOOGLE_AVIS_COUNT = 68;
+const GOOGLE_AVIS_COUNT = 71;
 
 const NAV = [
   { id: 'maison', label: 'La Maison' },
@@ -991,12 +995,14 @@ const FILIERES = [
   {
     name: 'Le Porc Noir de Bigorre',
     meta: 'Race ancestrale · Pyrénées',
+    page: '/porc-noir-de-bigorre/',
     img: 'assets/porc-noir-de-bigorre.jpg',
     text: "Une race ancestrale, sauvée de l'oubli, élevée en plein air au pied des Pyrénées. Le Porc Noir de Bigorre grandit lentement, se nourrit de glands et de châtaignes, et nous offre une viande persillée, dense, au goût affirmé qu'aucun élevage industriel ne sait reproduire. Nous sommes fiers d'être la seule boucherie artisanale de Seine-Saint-Denis (93) à la commercialiser : une pièce rare, pour ceux qui cherchent le vrai goût du terroir.",
   },
   {
     name: 'Le Porc Francilin',
     meta: 'Paris Terroirs · Île-de-France',
+    page: '/porc-francilin/',
     img: 'assets/porc-francilin.jpg',
     text: "Le goût de notre terroir. Découvrez le Porc Francilin par Paris Terroirs : une filière locale, née et élevée au cœur du Bassin Parisien. Nourri avec des graines de lin, il donne une viande tendre et savoureuse, et c'est un choix qui soutient directement les éleveurs franciliens. Du champ à l'assiette, savourez l'Île-de-France !",
   },
@@ -1408,6 +1414,7 @@ function Selection() {
                 <button type="button" className="filiere-more" onClick={() => setOpen({ ...open, [f.name]: !open[f.name] })}>
                   {open[f.name] ? 'Réduire' : 'Lire la suite'}
                 </button>
+                {f.page && <a className="filiere-lien" href={f.page} data-cursor="Découvrir">Tout savoir sur ce porc →</a>}
               </div>
             </article>
           ))}
@@ -1631,6 +1638,8 @@ function Footer({ onJump }) {
           </div>
           <div className="footer-col">
             <h5>Découvrir</h5>
+            <a href="/porc-noir-de-bigorre/">Porc Noir de Bigorre</a>
+            <a href="/porc-francilin/">Porc Francilin</a>
             <a href="/nos-viandes/">Nos viandes</a>
             <a href="/traiteur/">Traiteur &amp; charcuterie</a>
             <a href="/rotisserie/">La rôtisserie</a>
